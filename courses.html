@@ -10,7 +10,6 @@
       font-family: Arial, sans-serif;
       background: #f5f7fb;
       color: #1f2937;
-      line-height: 1.7;
     }
     a { text-decoration: none; }
     header {
@@ -29,28 +28,51 @@
     nav {
       display: flex;
       gap: 20px;
-      flex-wrap: wrap;
+      align-items: center;
     }
-    nav a {
+    nav a, nav button {
       color: white;
+      background: none;
+      border: none;
       font-size: 1rem;
+      cursor: pointer;
     }
-    nav a:hover { text-decoration: underline; }
+    nav a:hover, nav button:hover { text-decoration: underline; }
+    .user-info {
+      color: white;
+      font-size: 0.9rem;
+    }
     .hero {
       background: linear-gradient(135deg, #075985, #0ea5e9);
       color: white;
       text-align: center;
       padding: 60px 20px;
     }
-    .hero h1 {
-      font-size: clamp(2.2rem, 4vw, 3.5rem);
-      margin-bottom: 12px;
+    .hero h1 { font-size: 2.5rem; margin-bottom: 12px; }
+    .hero p { font-size: 1.1rem; }
+    .login-prompt {
+      text-align: center;
+      padding: 40px 20px;
+      background: white;
+      border-radius: 10px;
+      margin: 40px auto;
+      max-width: 600px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
-    .hero p {
-      font-size: 1.1rem;
-      max-width: 700px;
-      margin: 0 auto;
+    .login-prompt h2 {
+      color: #075985;
+      margin-bottom: 15px;
     }
+    .login-prompt a {
+      display: inline-block;
+      background: #075985;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 6px;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .login-prompt a:hover { background: #06496a; }
     .courses {
       width: 85%;
       margin: 40px auto;
@@ -87,8 +109,14 @@
       padding: 10px 20px;
       border-radius: 8px;
       font-weight: bold;
+      cursor: pointer;
+      border: none;
     }
     .btn:hover { background: #06496a; }
+    .btn.disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
     footer {
       background: #0f2742;
       color: white;
@@ -100,13 +128,8 @@
       .courses { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
     }
     @media (max-width: 700px) {
-      header {
-        flex-direction: column;
-        gap: 12px;
-      }
-      nav {
-        justify-content: center;
-      }
+      header { flex-direction: column; gap: 12px; }
+      nav { flex-direction: column; gap: 10px; text-align: center; }
       .courses { grid-template-columns: 1fr; }
     }
   </style>
@@ -119,7 +142,9 @@
       <a href="courses.html">Courses</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
-      <a href="login.html">Login</a>
+      <span class="user-info" id="userInfo"></span>
+      <button onclick="logout()" id="logoutBtn" style="display:none;">Logout</button>
+      <a href="login.html" id="loginLink">Login</a>
     </nav>
   </header>
 
@@ -128,47 +153,99 @@
     <p>Choose a course and build practical digital skills step by step.</p>
   </section>
 
-  <section class="courses">
+  <div id="loginPrompt" style="display:none;">
+    <div class="login-prompt">
+      <h2>🔒 Please Login to Access Courses</h2>
+      <p>You need to login to start learning and access the course content.</p>
+      <a href="login.html">Login / Register Now</a>
+    </div>
+  </div>
+
+  <section class="courses" id="coursesSection" style="display:none;">
     <div class="course-card">
       <div class="icon">📱</div>
       <h2>Smartphone Basics</h2>
       <p>Learn calls, contacts, apps, settings and messaging in a simple way.</p>
-      <a href="#" class="btn">Start Course</a>
+      <button class="btn" onclick="startCourse('Smartphone Basics')">Start Course</button>
     </div>
     <div class="course-card">
       <div class="icon">💻</div>
       <h2>Computer Fundamentals</h2>
       <p>Learn keyboard, mouse, files, folders and basic computer software.</p>
-      <a href="#" class="btn">Start Course</a>
+      <button class="btn" onclick="startCourse('Computer Fundamentals')">Start Course</button>
     </div>
     <div class="course-card">
       <div class="icon">🌐</div>
-      <h2>Internet &amp; Email</h2>
+      <h2>Internet & Email</h2>
       <p>Learn web searching, email, browsers and responsible internet use.</p>
-      <a href="#" class="btn">Start Course</a>
+      <button class="btn" onclick="startCourse('Internet & Email')">Start Course</button>
     </div>
     <div class="course-card">
       <div class="icon">🔐</div>
       <h2>Cyber Safety</h2>
       <p>Learn about passwords, phishing, OTP safety and online scams.</p>
-      <a href="#" class="btn">Start Course</a>
+      <button class="btn" onclick="startCourse('Cyber Safety')">Start Course</button>
     </div>
     <div class="course-card">
       <div class="icon">💳</div>
       <h2>Digital Payments</h2>
       <p>Learn UPI, QR codes, transactions and safe digital payment practices.</p>
-      <a href="#" class="btn">Start Course</a>
+      <button class="btn" onclick="startCourse('Digital Payments')">Start Course</button>
     </div>
     <div class="course-card">
       <div class="icon">🏛️</div>
       <h2>Government Services</h2>
       <p>Learn the basics of accessing useful government services online.</p>
-      <a href="#" class="btn">Start Course</a>
+      <button class="btn" onclick="startCourse('Government Services')">Start Course</button>
     </div>
   </section>
 
   <footer>
     © 2026 Digital Sakshar | B.Tech CSE Mini Project
   </footer>
+
+  <script>
+    window.addEventListener('load', function() {
+      const user = localStorage.getItem('currentUser');
+      const loginLink = document.getElementById('loginLink');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const userInfo = document.getElementById('userInfo');
+      const loginPrompt = document.getElementById('loginPrompt');
+      const coursesSection = document.getElementById('coursesSection');
+
+      if (user) {
+        loginLink.style.display = 'none';
+        logoutBtn.style.display = 'inline-block';
+        userInfo.textContent = `Welcome, ${user}!`;
+        loginPrompt.style.display = 'none';
+        coursesSection.style.display = 'grid';
+      } else {
+        loginLink.style.display = 'inline-block';
+        logoutBtn.style.display = 'none';
+        userInfo.textContent = '';
+        loginPrompt.style.display = 'block';
+        coursesSection.style.display = 'none';
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem('currentUser');
+      location.reload();
+    }
+
+    function startCourse(courseName) {
+      const user = localStorage.getItem('currentUser');
+      if (user) {
+        const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses') || '[]');
+        if (!enrolledCourses.includes(courseName)) {
+          enrolledCourses.push(courseName);
+          localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses));
+        }
+        alert(`${user}, you have enrolled in ${courseName}!\n\nCourse content will be available soon.`);
+      } else {
+        window.location.href = 'login.html';
+      }
+    }
+  </script>
 </body>
 </html>
