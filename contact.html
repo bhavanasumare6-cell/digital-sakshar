@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Digital Sakshar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #1f2937;
+      line-height: 1.7;
+    }
+    a { text-decoration: none; }
+    header {
+      background: #075985;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+    }
+    .logo {
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      font-size: 1rem;
+    }
+    nav a:hover { text-decoration: underline; }
+    .section {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .section h2 {
+      text-align: center;
+      color: #075985;
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+    }
+    .intro {
+      text-align: center;
+      color: #4b5563;
+      margin-bottom: 30px;
+    }
+    .contact-wrap {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    .info, .form {
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+      flex: 1 1 420px;
+    }
+    .info h3, .form h3 {
+      color: #075985;
+      margin-bottom: 18px;
+      font-size: 1.7rem;
+    }
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    button {
+      background: #075985;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover { background: #06496a; }
+    footer {
+      background: #0f2742;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      nav {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">🌐 Digital Sakshar</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="section">
+    <h2>Contact Us</h2>
+    <p class="intro">Have any questions or suggestions? Feel free to contact us.</p>
+
+    <div class="contact-wrap">
+      <div class="info">
+        <h3>College Information</h3>
+        <p><strong>🏫 College Name:</strong><br>Ashokrao Mane Group of Institutes</p>
+        <p><strong>📚 Project:</strong><br>Digital Sakshar</p>
+        <p><strong>📧 Email:</strong><br>digitalsakshar@gmail.com</p>
+        <p><strong>📞 Phone:</strong><br>+91 XXXXX XXXXX</p>
+        <p><strong>📍 Address:</strong><br>Ashokrao Mane Group of Institutes, Maharashtra, India</p>
+      </div>
+
+      <div class="form">
+        <h3>Send Us a Message</h3>
+        <form>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" placeholder="Enter subject" required>
+
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Write your message..." required></textarea>
+
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Digital Sakshar | Ashokrao Mane Group of Institutes
+  </footer>
+</body>
+</html>
