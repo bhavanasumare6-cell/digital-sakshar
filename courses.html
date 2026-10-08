@@ -7,23 +7,24 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f5f7fb;
       color: #1f2937;
     }
     a { text-decoration: none; }
     header {
-      background: #075985;
+      background: linear-gradient(135deg, #075985, #0c7ba7);
       color: white;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 18px 8%;
+      padding: 16px 8%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
     .logo {
-      color: white;
-      font-size: 2rem;
+      font-size: 1.8rem;
       font-weight: bold;
+      color: white;
     }
     nav {
       display: flex;
@@ -34,51 +35,63 @@
       color: white;
       background: none;
       border: none;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 4px;
+      transition: 0.3s;
     }
-    nav a:hover, nav button:hover { text-decoration: underline; }
+    nav a:hover, nav button:hover {
+      background: rgba(255,255,255,0.2);
+    }
     .user-info {
-      color: white;
+      color: #e0f2fe;
       font-size: 0.9rem;
     }
     .hero {
       background: linear-gradient(135deg, #075985, #0ea5e9);
       color: white;
       text-align: center;
-      padding: 60px 20px;
+      padding: 70px 20px;
     }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 12px; }
-    .hero p { font-size: 1.1rem; }
+    .hero h1 { font-size: 2.8rem; margin-bottom: 12px; }
+    .hero p { font-size: 1.15rem; }
     .login-prompt {
       text-align: center;
-      padding: 40px 20px;
+      padding: 50px 20px;
       background: white;
-      border-radius: 10px;
+      border-radius: 12px;
       margin: 40px auto;
-      max-width: 600px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      max-width: 700px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.08);
     }
     .login-prompt h2 {
       color: #075985;
       margin-bottom: 15px;
+      font-size: 1.8rem;
+    }
+    .login-prompt p {
+      color: #555;
+      margin-bottom: 20px;
     }
     .login-prompt a {
       display: inline-block;
       background: #075985;
       color: white;
-      padding: 12px 25px;
-      border-radius: 6px;
-      margin-top: 15px;
+      padding: 12px 30px;
+      border-radius: 8px;
       font-weight: bold;
+      transition: 0.3s;
     }
-    .login-prompt a:hover { background: #06496a; }
+    .login-prompt a:hover {
+      background: #06496a;
+    }
     .courses {
       width: 85%;
       margin: 40px auto;
       display: grid;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(3, minmax(240px, 1fr));
+      gap: 28px;
     }
     .course-card {
       background: white;
@@ -86,50 +99,64 @@
       padding: 30px 24px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.07);
       text-align: center;
-      transition: transform 0.2s ease;
+      transition: 0.3s;
     }
     .course-card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
     }
-    .icon { font-size: 3rem; margin-bottom: 12px; }
+    .icon { font-size: 3rem; margin-bottom: 15px; }
     .course-card h2 {
       color: #075985;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       font-size: 1.5rem;
     }
     .course-card p {
-      color: #4b5563;
+      color: #555;
       min-height: 72px;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
+      line-height: 1.6;
     }
     .btn {
       display: inline-block;
       background: #075985;
       color: white;
-      padding: 10px 20px;
+      padding: 11px 22px;
       border-radius: 8px;
       font-weight: bold;
-      cursor: pointer;
       border: none;
+      cursor: pointer;
+      transition: 0.3s;
     }
-    .btn:hover { background: #06496a; }
-    .btn.disabled {
-      background: #ccc;
-      cursor: not-allowed;
+    .btn:hover {
+      background: #06496a;
+      transform: translateY(-2px);
+    }
+    .enroll-badge {
+      display: inline-block;
+      background: #10b981;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      margin-top: 8px;
     }
     footer {
       background: #0f2742;
       color: white;
       text-align: center;
-      padding: 20px;
-      margin-top: 40px;
+      padding: 30px 20px;
+      margin-top: 50px;
+      border-top: 4px solid #075985;
     }
+    footer p { margin-bottom: 8px; }
     @media (max-width: 900px) {
-      .courses { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+      .courses { grid-template-columns: repeat(2, minmax(240px, 1fr)); }
     }
     @media (max-width: 700px) {
-      header { flex-direction: column; gap: 12px; }
+      header { flex-direction: column; gap: 15px; }
       nav { flex-direction: column; gap: 10px; text-align: center; }
+      .hero h1 { font-size: 2rem; }
       .courses { grid-template-columns: 1fr; }
     }
   </style>
@@ -143,8 +170,8 @@
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
       <span class="user-info" id="userInfo"></span>
-      <button onclick="logout()" id="logoutBtn" style="display:none;">Logout</button>
-      <a href="login.html" id="loginLink">Login</a>
+      <button onclick="logout()" id="logoutBtn" style="display:none; background:#ff6b6b; color:white; padding:8px 16px; border-radius:4px;">Logout</button>
+      <a href="login.html" id="loginLink" style="background:#fff; color:#075985; padding:8px 16px; border-radius:4px; font-weight:bold;">Login</a>
     </nav>
   </header>
 
@@ -155,8 +182,8 @@
 
   <div id="loginPrompt" style="display:none;">
     <div class="login-prompt">
-      <h2>🔒 Please Login to Access Courses</h2>
-      <p>You need to login to start learning and access the course content.</p>
+      <h2>🔒 Login Required</h2>
+      <p>You need to login or register to access the courses and start learning. It's free and takes just a few seconds!</p>
       <a href="login.html">Login / Register Now</a>
     </div>
   </div>
@@ -166,46 +193,53 @@
       <div class="icon">📱</div>
       <h2>Smartphone Basics</h2>
       <p>Learn calls, contacts, apps, settings and messaging in a simple way.</p>
-      <button class="btn" onclick="startCourse('Smartphone Basics')">Start Course</button>
+      <button class="btn" onclick="enrollCourse('Smartphone Basics')">Start Course</button>
+      <div id="enrolled-Smartphone" style="display:none;"><div class="enroll-badge">✓ Enrolled</div></div>
     </div>
     <div class="course-card">
       <div class="icon">💻</div>
       <h2>Computer Fundamentals</h2>
       <p>Learn keyboard, mouse, files, folders and basic computer software.</p>
-      <button class="btn" onclick="startCourse('Computer Fundamentals')">Start Course</button>
+      <button class="btn" onclick="enrollCourse('Computer Fundamentals')">Start Course</button>
+      <div id="enrolled-Computer" style="display:none;"><div class="enroll-badge">✓ Enrolled</div></div>
     </div>
     <div class="course-card">
       <div class="icon">🌐</div>
       <h2>Internet & Email</h2>
       <p>Learn web searching, email, browsers and responsible internet use.</p>
-      <button class="btn" onclick="startCourse('Internet & Email')">Start Course</button>
+      <button class="btn" onclick="enrollCourse('Internet & Email')">Start Course</button>
+      <div id="enrolled-Internet" style="display:none;"><div class="enroll-badge">✓ Enrolled</div></div>
     </div>
     <div class="course-card">
       <div class="icon">🔐</div>
       <h2>Cyber Safety</h2>
       <p>Learn about passwords, phishing, OTP safety and online scams.</p>
-      <button class="btn" onclick="startCourse('Cyber Safety')">Start Course</button>
+      <button class="btn" onclick="enrollCourse('Cyber Safety')">Start Course</button>
+      <div id="enrolled-Cyber" style="display:none;"><div class="enroll-badge">✓ Enrolled</div></div>
     </div>
     <div class="course-card">
       <div class="icon">💳</div>
       <h2>Digital Payments</h2>
       <p>Learn UPI, QR codes, transactions and safe digital payment practices.</p>
-      <button class="btn" onclick="startCourse('Digital Payments')">Start Course</button>
+      <button class="btn" onclick="enrollCourse('Digital Payments')">Start Course</button>
+      <div id="enrolled-Digital" style="display:none;"><div class="enroll-badge">✓ Enrolled</div></div>
     </div>
     <div class="course-card">
       <div class="icon">🏛️</div>
       <h2>Government Services</h2>
       <p>Learn the basics of accessing useful government services online.</p>
-      <button class="btn" onclick="startCourse('Government Services')">Start Course</button>
+      <button class="btn" onclick="enrollCourse('Government Services')">Start Course</button>
+      <div id="enrolled-Government" style="display:none;"><div class="enroll-badge">✓ Enrolled</div></div>
     </div>
   </section>
 
   <footer>
-    © 2026 Digital Sakshar | B.Tech CSE Mini Project
+    <p>© 2026 Digital Sakshar | B.Tech CSE Mini Project</p>
+    <p>Ashokrao Mane Group of Institutes</p>
   </footer>
 
   <script>
-    window.addEventListener('load', function() {
+    function checkLogin() {
       const user = localStorage.getItem('currentUser');
       const loginLink = document.getElementById('loginLink');
       const logoutBtn = document.getElementById('logoutBtn');
@@ -216,9 +250,10 @@
       if (user) {
         loginLink.style.display = 'none';
         logoutBtn.style.display = 'inline-block';
-        userInfo.textContent = `Welcome, ${user}!`;
+        userInfo.textContent = `👤 Welcome, ${user}!`;
         loginPrompt.style.display = 'none';
         coursesSection.style.display = 'grid';
+        loadEnrolledCourses();
       } else {
         loginLink.style.display = 'inline-block';
         logoutBtn.style.display = 'none';
@@ -226,26 +261,43 @@
         loginPrompt.style.display = 'block';
         coursesSection.style.display = 'none';
       }
-    });
+    }
+
+    function enrollCourse(courseName) {
+      const user = localStorage.getItem('currentUser');
+      if (!user) {
+        alert('Please login first!');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const enrolled = JSON.parse(localStorage.getItem('enrolledCourses') || '[]');
+      if (!enrolled.includes(courseName)) {
+        enrolled.push(courseName);
+        localStorage.setItem('enrolledCourses', JSON.stringify(enrolled));
+      }
+
+      alert(`✅ You have enrolled in "${courseName}"!\n\nCourse content will be available soon.`);
+      loadEnrolledCourses();
+    }
+
+    function loadEnrolledCourses() {
+      const enrolled = JSON.parse(localStorage.getItem('enrolledCourses') || '[]');
+      enrolled.forEach(course => {
+        const courseId = course.split(' ')[0];
+        const badge = document.getElementById(`enrolled-${courseId}`);
+        if (badge) badge.style.display = 'block';
+      });
+    }
 
     function logout() {
       localStorage.removeItem('currentUser');
+      localStorage.removeItem('enrolledCourses');
+      alert('You have been logged out!');
       location.reload();
     }
 
-    function startCourse(courseName) {
-      const user = localStorage.getItem('currentUser');
-      if (user) {
-        const enrolledCourses = JSON.parse(localStorage.getItem('enrolledCourses') || '[]');
-        if (!enrolledCourses.includes(courseName)) {
-          enrolledCourses.push(courseName);
-          localStorage.setItem('enrolledCourses', JSON.stringify(enrolledCourses));
-        }
-        alert(`${user}, you have enrolled in ${courseName}!\n\nCourse content will be available soon.`);
-      } else {
-        window.location.href = 'login.html';
-      }
-    }
+    window.addEventListener('load', checkLogin);
   </script>
 </body>
 </html>
