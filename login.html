@@ -3,201 +3,233 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digital Sakshar - Login</title>
+  <title>Digital Sakshar - Login & Register</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       background: linear-gradient(135deg, #4facfe, #00c6ff);
+      padding: 20px;
     }
-    .login-box {
-      width: min(90%, 390px);
+    .container {
+      width: min(90%, 420px);
       background: white;
       border-radius: 16px;
-      padding: 35px 30px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
-      text-align: center;
+      padding: 40px 30px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.25);
     }
     .logo {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 16px;
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 20px;
       border-radius: 50%;
-      background: #075985;
+      background: linear-gradient(135deg, #075985, #0c7ba7);
       color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2rem;
+      font-size: 2.5rem;
       font-weight: bold;
     }
     h1 {
       color: #075985;
-      margin-bottom: 6px;
+      text-align: center;
+      margin-bottom: 8px;
       font-size: 2rem;
     }
     .subtitle {
-      color: #4b5563;
-      margin-bottom: 24px;
+      color: #555;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 0.95rem;
     }
-    .field {
-      text-align: left;
+    .tabs {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .tab-btn {
+      flex: 1;
+      background: #e0e7ff;
+      border: 2px solid #e0e7ff;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #075985;
+      transition: 0.3s;
+    }
+    .tab-btn.active {
+      background: #075985;
+      color: white;
+      border-color: #075985;
+    }
+    .form-group {
       margin-bottom: 18px;
     }
     label {
       display: block;
       margin-bottom: 8px;
-      font-weight: bold;
+      font-weight: 600;
+      color: #333;
     }
     input {
       width: 100%;
       padding: 12px 14px;
-      border: 1px solid #cbd5e1;
+      border: 1.5px solid #cbd5e1;
       border-radius: 8px;
       font-size: 1rem;
+      transition: 0.3s;
     }
     input:focus {
       outline: none;
       border-color: #075985;
-      box-shadow: 0 0 0 2px rgba(7, 89, 133, 0.12);
+      box-shadow: 0 0 0 3px rgba(7, 89, 133, 0.1);
     }
-    .login-btn {
+    .btn {
       width: 100%;
       background: #075985;
       color: white;
       border: none;
-      border-radius: 8px;
       padding: 12px;
+      border-radius: 8px;
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.3s;
     }
-    .login-btn:hover { background: #06496a; }
-    .signup {
-      margin-top: 20px;
-      color: #4b5563;
+    .btn:hover {
+      background: #06496a;
+      transform: translateY(-2px);
+    }
+    .message {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
       font-size: 0.95rem;
     }
-    .signup a {
-      color: #075985;
-      font-weight: bold;
-      cursor: pointer;
+    .error {
+      background: #fee2e2;
+      color: #dc2626;
+      border: 1px solid #fecaca;
     }
-    .home {
-      display: inline-block;
-      margin-top: 18px;
+    .success {
+      background: #dcfce7;
+      color: #16a34a;
+      border: 1px solid #bbf7d0;
+    }
+    .home-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .home-link a {
       color: #075985;
       font-weight: bold;
+      font-size: 0.95rem;
+    }
+    .home-link a:hover {
+      text-decoration: underline;
     }
     .footer {
+      text-align: center;
       margin-top: 24px;
       font-size: 0.8rem;
-      color: #6b7280;
+      color: #888;
     }
-    .error { color: red; font-size: 0.9rem; margin-top: 10px; }
-    .success { color: green; font-size: 0.9rem; margin-top: 10px; }
-    .tab-buttons {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    .tab-btn {
-      flex: 1;
-      background: #e0e7ff;
-      border: none;
-      padding: 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .tab-btn.active {
-      background: #075985;
-      color: white;
-    }
+    #loginForm, #registerForm { display: none; }
+    #loginForm.active, #registerForm.active { display: block; }
   </style>
 </head>
 <body>
-  <div class="login-box">
+  <div class="container">
     <div class="logo">DS</div>
     <h1>Digital Sakshar</h1>
     <p class="subtitle">Digital Literacy Learning Platform</p>
 
-    <div class="tab-buttons">
-      <button class="tab-btn active" onclick="showTab('login')">Login</button>
-      <button class="tab-btn" onclick="showTab('register')">Register</button>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('login')">Login</button>
+      <button class="tab-btn" onclick="switchTab('register')">Register</button>
     </div>
 
     <!-- Login Form -->
-    <form id="loginForm" onsubmit="handleLogin(event)">
-      <div class="field">
-        <label for="loginEmail">Email / Username</label>
+    <form id="loginForm" class="active" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="loginEmail">Email or Username</label>
         <input type="text" id="loginEmail" placeholder="Enter your email or username" required>
       </div>
 
-      <div class="field">
+      <div class="form-group">
         <label for="loginPassword">Password</label>
         <input type="password" id="loginPassword" placeholder="Enter your password" required>
       </div>
 
-      <button class="login-btn" type="submit">Login</button>
+      <button type="submit" class="btn">Login</button>
       <div id="loginMessage"></div>
     </form>
 
     <!-- Register Form -->
-    <form id="registerForm" onsubmit="handleRegister(event)" style="display:none;">
-      <div class="field">
+    <form id="registerForm" onsubmit="handleRegister(event)">
+      <div class="form-group">
         <label for="regName">Full Name</label>
         <input type="text" id="regName" placeholder="Enter your full name" required>
       </div>
 
-      <div class="field">
+      <div class="form-group">
         <label for="regEmail">Email</label>
         <input type="email" id="regEmail" placeholder="Enter your email" required>
       </div>
 
-      <div class="field">
+      <div class="form-group">
         <label for="regPassword">Password</label>
-        <input type="password" id="regPassword" placeholder="Enter a password" required>
+        <input type="password" id="regPassword" placeholder="Enter a password (min 6 chars)" required minlength="6">
       </div>
 
-      <button class="login-btn" type="submit">Register</button>
+      <div class="form-group">
+        <label for="regPhone">Phone Number</label>
+        <input type="tel" id="regPhone" placeholder="Enter your phone number" required>
+      </div>
+
+      <button type="submit" class="btn">Register</button>
       <div id="registerMessage"></div>
     </form>
 
-    <a href="index.html" class="home">← Back to Home</a>
+    <div class="home-link">
+      <a href="index.html">← Back to Home</a>
+    </div>
 
     <div class="footer">© 2026 Digital Sakshar | Learn • Explore • Grow</div>
   </div>
 
   <script>
-    // Demo users database (stored in localStorage)
-    function initializeDB() {
+    // Initialize database with demo users
+    function initDB() {
       if (!localStorage.getItem('users')) {
-        const users = [
-          { email: 'demo@gmail.com', password: 'demo123', name: 'Demo User' },
-          { email: 'test@gmail.com', password: 'test123', name: 'Test User' }
+        const demoUsers = [
+          { id: 1, name: 'Demo User', email: 'demo@gmail.com', password: 'demo123', phone: '9876543210' },
+          { id: 2, name: 'Test User', email: 'test@gmail.com', password: 'test123', phone: '9123456789' }
         ];
-        localStorage.setItem('users', JSON.stringify(users));
+        localStorage.setItem('users', JSON.stringify(demoUsers));
       }
     }
 
-    function showTab(tab) {
+    function switchTab(tab) {
       const loginForm = document.getElementById('loginForm');
       const registerForm = document.getElementById('registerForm');
       const tabs = document.querySelectorAll('.tab-btn');
 
       if (tab === 'login') {
-        loginForm.style.display = 'block';
-        registerForm.style.display = 'none';
+        loginForm.classList.add('active');
+        registerForm.classList.remove('active');
         tabs[0].classList.add('active');
         tabs[1].classList.remove('active');
       } else {
-        loginForm.style.display = 'none';
-        registerForm.style.display = 'block';
+        loginForm.classList.remove('active');
+        registerForm.classList.add('active');
         tabs[0].classList.remove('active');
         tabs[1].classList.add('active');
       }
@@ -205,50 +237,63 @@
 
     function handleLogin(event) {
       event.preventDefault();
-      initializeDB();
+      initDB();
 
       const email = document.getElementById('loginEmail').value;
       const password = document.getElementById('loginPassword').value;
-      const message = document.getElementById('loginMessage');
+      const messageDiv = document.getElementById('loginMessage');
 
       const users = JSON.parse(localStorage.getItem('users'));
       const user = users.find(u => (u.email === email || u.name === email) && u.password === password);
 
       if (user) {
         localStorage.setItem('currentUser', user.name);
-        message.innerHTML = '<span class="success">Login successful! Redirecting...</span>';
+        messageDiv.innerHTML = '<div class="message success">✅ Login successful! Redirecting...</div>';
         setTimeout(() => {
           window.location.href = 'index.html';
         }, 1500);
       } else {
-        message.innerHTML = '<span class="error">Invalid email or password!</span>';
+        messageDiv.innerHTML = '<div class="message error">❌ Invalid email or password!</div>';
       }
     }
 
     function handleRegister(event) {
       event.preventDefault();
-      initializeDB();
+      initDB();
 
       const name = document.getElementById('regName').value;
       const email = document.getElementById('regEmail').value;
       const password = document.getElementById('regPassword').value;
-      const message = document.getElementById('registerMessage');
+      const phone = document.getElementById('regPhone').value;
+      const messageDiv = document.getElementById('registerMessage');
 
       const users = JSON.parse(localStorage.getItem('users'));
 
       if (users.find(u => u.email === email)) {
-        message.innerHTML = '<span class="error">Email already exists!</span>';
+        messageDiv.innerHTML = '<div class="message error">❌ Email already registered!</div>';
         return;
       }
 
-      users.push({ email, password, name });
+      const newUser = {
+        id: users.length + 1,
+        name,
+        email,
+        password,
+        phone,
+        registeredDate: new Date().toLocaleDateString()
+      };
+
+      users.push(newUser);
       localStorage.setItem('users', JSON.stringify(users));
 
-      message.innerHTML = '<span class="success">Registration successful! Please login.</span>';
-      setTimeout(() => showTab('login'), 1500);
+      messageDiv.innerHTML = '<div class="message success">✅ Registration successful! Switching to login...</div>';
+      setTimeout(() => switchTab('login'), 1500);
+
+      // Clear form
+      document.getElementById('registerForm').reset();
     }
 
-    window.addEventListener('load', initializeDB);
+    window.addEventListener('load', initDB);
   </script>
 </body>
 </html>
