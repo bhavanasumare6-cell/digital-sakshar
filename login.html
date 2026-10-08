@@ -65,13 +65,6 @@
       border-color: #075985;
       box-shadow: 0 0 0 2px rgba(7, 89, 133, 0.12);
     }
-    .forgot {
-      display: block;
-      text-align: left;
-      margin: 10px 0 18px;
-      color: #075985;
-      font-size: 0.95rem;
-    }
     .login-btn {
       width: 100%;
       background: #075985;
@@ -92,6 +85,7 @@
     .signup a {
       color: #075985;
       font-weight: bold;
+      cursor: pointer;
     }
     .home {
       display: inline-block;
@@ -104,6 +98,26 @@
       font-size: 0.8rem;
       color: #6b7280;
     }
+    .error { color: red; font-size: 0.9rem; margin-top: 10px; }
+    .success { color: green; font-size: 0.9rem; margin-top: 10px; }
+    .tab-buttons {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .tab-btn {
+      flex: 1;
+      background: #e0e7ff;
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .tab-btn.active {
+      background: #075985;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -112,28 +126,129 @@
     <h1>Digital Sakshar</h1>
     <p class="subtitle">Digital Literacy Learning Platform</p>
 
-    <form>
+    <div class="tab-buttons">
+      <button class="tab-btn active" onclick="showTab('login')">Login</button>
+      <button class="tab-btn" onclick="showTab('register')">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" onsubmit="handleLogin(event)">
       <div class="field">
-        <label for="email">Email / Username</label>
-        <input type="text" id="email" placeholder="Enter your email or username" required>
+        <label for="loginEmail">Email / Username</label>
+        <input type="text" id="loginEmail" placeholder="Enter your email or username" required>
       </div>
 
       <div class="field">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password" required>
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password" required>
       </div>
 
-      <a href="#" class="forgot">Forgot Password?</a>
       <button class="login-btn" type="submit">Login</button>
+      <div id="loginMessage"></div>
     </form>
 
-    <div class="signup">
-      Don't have an account? <a href="#">Register Now</a>
-    </div>
+    <!-- Register Form -->
+    <form id="registerForm" onsubmit="handleRegister(event)" style="display:none;">
+      <div class="field">
+        <label for="regName">Full Name</label>
+        <input type="text" id="regName" placeholder="Enter your full name" required>
+      </div>
+
+      <div class="field">
+        <label for="regEmail">Email</label>
+        <input type="email" id="regEmail" placeholder="Enter your email" required>
+      </div>
+
+      <div class="field">
+        <label for="regPassword">Password</label>
+        <input type="password" id="regPassword" placeholder="Enter a password" required>
+      </div>
+
+      <button class="login-btn" type="submit">Register</button>
+      <div id="registerMessage"></div>
+    </form>
 
     <a href="index.html" class="home">← Back to Home</a>
 
     <div class="footer">© 2026 Digital Sakshar | Learn • Explore • Grow</div>
   </div>
+
+  <script>
+    // Demo users database (stored in localStorage)
+    function initializeDB() {
+      if (!localStorage.getItem('users')) {
+        const users = [
+          { email: 'demo@gmail.com', password: 'demo123', name: 'Demo User' },
+          { email: 'test@gmail.com', password: 'test123', name: 'Test User' }
+        ];
+        localStorage.setItem('users', JSON.stringify(users));
+      }
+    }
+
+    function showTab(tab) {
+      const loginForm = document.getElementById('loginForm');
+      const registerForm = document.getElementById('registerForm');
+      const tabs = document.querySelectorAll('.tab-btn');
+
+      if (tab === 'login') {
+        loginForm.style.display = 'block';
+        registerForm.style.display = 'none';
+        tabs[0].classList.add('active');
+        tabs[1].classList.remove('active');
+      } else {
+        loginForm.style.display = 'none';
+        registerForm.style.display = 'block';
+        tabs[0].classList.remove('active');
+        tabs[1].classList.add('active');
+      }
+    }
+
+    function handleLogin(event) {
+      event.preventDefault();
+      initializeDB();
+
+      const email = document.getElementById('loginEmail').value;
+      const password = document.getElementById('loginPassword').value;
+      const message = document.getElementById('loginMessage');
+
+      const users = JSON.parse(localStorage.getItem('users'));
+      const user = users.find(u => (u.email === email || u.name === email) && u.password === password);
+
+      if (user) {
+        localStorage.setItem('currentUser', user.name);
+        message.innerHTML = '<span class="success">Login successful! Redirecting...</span>';
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 1500);
+      } else {
+        message.innerHTML = '<span class="error">Invalid email or password!</span>';
+      }
+    }
+
+    function handleRegister(event) {
+      event.preventDefault();
+      initializeDB();
+
+      const name = document.getElementById('regName').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+      const message = document.getElementById('registerMessage');
+
+      const users = JSON.parse(localStorage.getItem('users'));
+
+      if (users.find(u => u.email === email)) {
+        message.innerHTML = '<span class="error">Email already exists!</span>';
+        return;
+      }
+
+      users.push({ email, password, name });
+      localStorage.setItem('users', JSON.stringify(users));
+
+      message.innerHTML = '<span class="success">Registration successful! Please login.</span>';
+      setTimeout(() => showTab('login'), 1500);
+    }
+
+    window.addEventListener('load', initializeDB);
+  </script>
 </body>
 </html>
