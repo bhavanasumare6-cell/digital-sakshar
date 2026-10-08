@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learning Library | Digital Sakshar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+      line-height: 1.7;
+    }
+    a { text-decoration: none; }
+    header {
+      background: #075985;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+    }
+    .logo {
+      color: white;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      font-size: 1rem;
+    }
+    nav a:hover { text-decoration: underline; }
+    .hero {
+      background: linear-gradient(135deg, #075985, #0ea5e9);
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      margin-bottom: 12px;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .courses {
+      width: 85%;
+      margin: 40px auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .course-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .course-card:hover {
+      transform: translateY(-6px);
+    }
+    .icon { font-size: 3rem; margin-bottom: 12px; }
+    .course-card h2 {
+      color: #075985;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+    .course-card p {
+      color: #4b5563;
+      min-height: 72px;
+      margin-bottom: 16px;
+    }
+    .btn {
+      display: inline-block;
+      background: #075985;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .btn:hover { background: #06496a; }
+    footer {
+      background: #0f2742;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    @media (max-width: 900px) {
+      .courses { grid-template-columns: repeat(2, minmax(220px, 1fr)); }
+    }
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      nav {
+        justify-content: center;
+      }
+      .courses { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">🌐 Digital Sakshar</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Learning Library</h1>
+    <p>Choose a course and build practical digital skills step by step.</p>
+  </section>
+
+  <section class="courses">
+    <div class="course-card">
+      <div class="icon">📱</div>
+      <h2>Smartphone Basics</h2>
+      <p>Learn calls, contacts, apps, settings and messaging in a simple way.</p>
+      <a href="#" class="btn">Start Course</a>
+    </div>
+    <div class="course-card">
+      <div class="icon">💻</div>
+      <h2>Computer Fundamentals</h2>
+      <p>Learn keyboard, mouse, files, folders and basic computer software.</p>
+      <a href="#" class="btn">Start Course</a>
+    </div>
+    <div class="course-card">
+      <div class="icon">🌐</div>
+      <h2>Internet &amp; Email</h2>
+      <p>Learn web searching, email, browsers and responsible internet use.</p>
+      <a href="#" class="btn">Start Course</a>
+    </div>
+    <div class="course-card">
+      <div class="icon">🔐</div>
+      <h2>Cyber Safety</h2>
+      <p>Learn about passwords, phishing, OTP safety and online scams.</p>
+      <a href="#" class="btn">Start Course</a>
+    </div>
+    <div class="course-card">
+      <div class="icon">💳</div>
+      <h2>Digital Payments</h2>
+      <p>Learn UPI, QR codes, transactions and safe digital payment practices.</p>
+      <a href="#" class="btn">Start Course</a>
+    </div>
+    <div class="course-card">
+      <div class="icon">🏛️</div>
+      <h2>Government Services</h2>
+      <p>Learn the basics of accessing useful government services online.</p>
+      <a href="#" class="btn">Start Course</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Digital Sakshar | B.Tech CSE Mini Project
+  </footer>
+</body>
+</html>
