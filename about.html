@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Digital Sakshar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f9ff;
+      color: #1f2937;
+      line-height: 1.7;
+    }
+    a { text-decoration: none; }
+    header {
+      background: #075985;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 8%;
+    }
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: white;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      font-size: 1rem;
+    }
+    nav a:hover { text-decoration: underline; }
+    .hero {
+      background: linear-gradient(135deg, #075985, #0ea5e9);
+      color: white;
+      text-align: center;
+      padding: 70px 20px;
+    }
+    .hero h1 {
+      font-size: clamp(2.4rem, 4vw, 4rem);
+      margin-bottom: 12px;
+    }
+    .hero p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+    }
+    .content {
+      display: flex;
+      gap: 40px;
+      padding: 60px 8%;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .text {
+      flex: 1 1 500px;
+    }
+    .text h2 {
+      color: #075985;
+      margin-bottom: 18px;
+      font-size: 2rem;
+    }
+    .icon {
+      flex: 1 1 250px;
+      text-align: center;
+      font-size: 8rem;
+    }
+    .mission {
+      background: #e0f2fe;
+      padding: 60px 8%;
+      text-align: center;
+    }
+    .mission h2 {
+      font-size: 2.2rem;
+      color: #075985;
+      margin-bottom: 30px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(250px, 1fr));
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 28px 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.07);
+    }
+    .card .emoji { font-size: 2.5rem; margin-bottom: 10px; }
+    .card h3 {
+      font-size: 1.6rem;
+      color: #075985;
+      margin-bottom: 10px;
+    }
+    footer {
+      background: #0f2742;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 700px) {
+      header {
+        flex-direction: column;
+        gap: 12px;
+      }
+      nav {
+        justify-content: center;
+      }
+      .cards {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a class="logo" href="index.html">🌐 Digital Sakshar</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="courses.html">Courses</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <a href="login.html">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>About Digital Sakshar</h1>
+    <p>Digital Sakshar is a digital literacy platform designed to help beginners learn essential digital skills in a simple, practical, and easy-to-understand way.</p>
+  </section>
+
+  <section class="content">
+    <div class="text">
+      <h2>📚 What is Digital Sakshar?</h2>
+      <p>Digital Sakshar is a learning platform that helps people understand and use modern digital technology confidently.</p>
+      <p>Our platform provides beginner-friendly lessons on smartphones, computers, internet usage, email, cyber safety, digital payments, and online services.</p>
+      <p>The main goal is to make digital learning simple, accessible, and useful for everyday life.</p>
+    </div>
+    <div class="icon">💻</div>
+  </section>
+
+  <section class="mission">
+    <h2>Our Mission &amp; Vision</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="emoji">🎯</div>
+        <h3>Our Mission</h3>
+        <p>To provide simple and practical digital education so that everyone can use technology safely and confidently in daily life.</p>
+      </div>
+      <div class="card">
+        <div class="emoji">🌟</div>
+        <h3>Our Vision</h3>
+        <p>To create a digitally empowered community where students, beginners, senior citizens, and rural communities can access and use technology effectively.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Digital Sakshar | Ashokrao Mane Group of Institutes
+  </footer>
+</body>
+</html>
